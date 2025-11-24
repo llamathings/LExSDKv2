@@ -11,6 +11,9 @@
 #define SPI_GAME_LE2 (1 << 2)
 #define SPI_GAME_LE3 (1 << 3)
 
+/// Special addition, originally for texture override.
+
+#define SPI_GAME_SDK_TARGET (1 << SDK_TARGET)
 
 /// SPI version macros.
 /// Duplicate the stuff in version.h!!!
