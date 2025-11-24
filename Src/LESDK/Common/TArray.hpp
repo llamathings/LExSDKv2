@@ -254,6 +254,8 @@ TArrayBase<T, WithRAII>::Insert(size_type const Position, const_reference Value)
     LESDK_CHECK(Position <= CountItems, "");
 
     pointer const Inserted = DoInsertUninit(Position, 1);
+    new (Inserted) T{};
+
     return (*Inserted = Value);
 }
 
@@ -265,6 +267,8 @@ TArrayBase<T, WithRAII>::Insert(size_type Position, value_type&& Value)
     LESDK_CHECK(Position <= CountItems, "");
 
     pointer const Inserted = DoInsertUninit(Position, 1);
+    new (Inserted) T{};
+
     return (*Inserted = std::move(Value));
 }
 
