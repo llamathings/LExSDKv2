@@ -179,6 +179,17 @@ void sdkFreeTyped(T* const Orig) {
 }
 
 
+// ! General-purpose CRC32 hash.
+// ========================================
+
+namespace LESDK {
+    DWORD MemCrc32(void* InData, int Length, DWORD Crc = 0);
+    DWORD MemCrc32(void const* InData, int Length, DWORD Crc = 0);
+    DWORD MemCrc32(std::span<BYTE> InData, DWORD Crc = 0);
+    DWORD MemCrc32(std::span<BYTE const> InData, DWORD Crc = 0);
+}
+
+
 // ! Non-member global variables.
 // ========================================
 

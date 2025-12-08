@@ -188,7 +188,7 @@ bool LESDK::EncodeWideFromUtf8(char const* const InUtf8Str, UINT const InUtf8Len
 }
 
 
-// ! String hashing.
+// ! CRC32 hashes.
 // ========================================
 
 // Adapted from: https://github.com/SirCxyrtyx/ASI_LEC_Loader/blob/114c65ab734a4267f1670ae794873d5708f0b20b/LEC_NativeTest/LEC_NativeTest.cpp#L69.
@@ -235,6 +235,32 @@ DWORD LESDK::WideStringHashCI(WCHAR const* Str) noexcept {
     }
 
     return Result;
+}
+
+DWORD LESDK::MemCrc32(void* const InData, int const Length, DWORD Crc) {
+    BYTE* Data = (BYTE*)InData;
+    Crc = ~Crc;
+    for (INT i = 0; i < Length; i++) {
+        Crc = (Crc << 8) ^ GCRCTable[(Crc >> 24) ^ Data[i]];
+    }
+    return ~Crc;
+}
+
+DWORD LESDK::MemCrc32(void const* const InData, int const Length, DWORD Crc) {
+    BYTE* Data = (BYTE*)InData;
+    Crc = ~Crc;
+    for (INT i = 0; i < Length; i++) {
+        Crc = (Crc << 8) ^ GCRCTable[(Crc >> 24) ^ Data[i]];
+    }
+    return ~Crc;
+}
+
+DWORD LESDK::MemCrc32(std::span<BYTE> const InData, DWORD const Crc) {
+    return MemCrc32(InData.data(), int(InData.size()), Crc);
+}
+
+DWORD LESDK::MemCrc32(std::span<BYTE const> const InData, DWORD const Crc) {
+    return MemCrc32(InData.data(), int(InData.size()), Crc);
 }
 
 
@@ -353,6 +379,13 @@ DWORD GetTypeHash(void const* const Value) noexcept {
     return static_cast<DWORD>(reinterpret_cast<UINT64>(Value));
 }
 
+DWORD GetTypeHash(FGuid& Value) noexcept {
+    return ::LESDK::MemCrc32(&Value, sizeof(FGuid));
+}
+
+DWORD GetTypeHash(FGuid const& Value) noexcept {
+    return ::LESDK::MemCrc32(&Value, sizeof(FGuid));
+}
 
 DWORD GetTypeHash(WCHAR* const Value) noexcept {
     return ::LESDK::WideStringHashCI(const_cast<WCHAR const*>(Value));

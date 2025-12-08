@@ -601,6 +601,10 @@ DWORD GetTypeHash(void const* Value) noexcept;
 
 // FString and SFXName provide their own hash functions.
 
+struct FGuid;
+DWORD GetTypeHash(FGuid& Value) noexcept;
+DWORD GetTypeHash(FGuid const& Value) noexcept;
+
 template<typename T>
 DWORD GetTypeHash(T* const Value) noexcept {
     return GetTypeHash(reinterpret_cast<void*>(Value));
