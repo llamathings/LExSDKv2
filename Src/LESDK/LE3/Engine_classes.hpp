@@ -8762,6 +8762,10 @@ public:
 	void ListDynamicActors ( );
 	void DebugPause ( );
 	void DebugAI ( struct SFXName Category );
+	void SetLevelStreamingStatus(struct SFXName PackageName, unsigned long bShouldBeLoaded, unsigned long bShouldBeVisible);
+	void StreamLevelOut(struct SFXName PackageName);
+	void StreamLevelIn(struct SFXName PackageName);
+	void OnlyLoadLevel(struct SFXName PackageName);
 };
 
 // Class Engine.Client

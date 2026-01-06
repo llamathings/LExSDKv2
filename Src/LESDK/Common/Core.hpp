@@ -198,3 +198,18 @@ extern FMallocLike**    GMalloc;
 extern UEngine**        GEngine;
 extern USystem**        GSys;
 extern UWorld**         GWorld;
+
+
+// ! Macro for using the location property of AActor, FTPOV, maybe some others?
+
+#if defined(SDK_TARGET_LE1) || defined(SDK_TARGET_LE2)
+
+#define LOCATION Location
+
+#endif
+
+#if defined(SDK_TARGET_LE3)
+
+#define LOCATION location
+
+#endif 

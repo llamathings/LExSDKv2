@@ -128,6 +128,7 @@ namespace LESDK {
     #define BUILTIN_STATICALLOCATEOBJECT_PHOOK      ::LESDK::Address::FromPostHook(/* 4C 89 44 24 ?? */ "55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC 80 05 00 00")
     #define BUILTIN_STATICCONSTRUCTOBJECT_PHOOK     ::LESDK::Address::FromPostHook(/* 48 8B C4 4C 89 */ "40 ?? 56 57 41 54 41 56 41 57 48 83 EC 70")
     #define BUILTIN_UWORLDSPAWNACTOR_PHOOK          ::LESDK::Address::FromPostHook(/* 48 8B C4 55 41 */ "54 41 55 41 56 41 57 48 8D 68 ?? 48 81 EC B0 00 00 00 48 C7 45 ?? FE FF FF FF 48 89 58 ?? 48 89 70 ?? 48 89 78 ?? 49 8B F9")
+    #define BUILTIN_EXEC_PHOOK                      ::LESDK::Address::FromPostHook(/* 48 8b c4 48 89 */ "50 10 55 56 57 41 54 41 55 41 56 41 57 48 8d a8 d8 fe ff ff 48 81 ec f0 01 00 00 48 c7 45 60 fe ff ff ff")
 
 
 #elif defined(SDK_TARGET_LE2)
@@ -146,6 +147,7 @@ namespace LESDK {
     #define BUILTIN_STATICALLOCATEOBJECT_PHOOK      ::LESDK::Address::FromPostHook(/* 4C 89 44 24 ?? */ "55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC 80 05 00 00")
     #define BUILTIN_STATICCONSTRUCTOBJECT_PHOOK     ::LESDK::Address::FromPostHook(/* 48 8B C4 48 89 */ "50 ?? 56 57 41 55 41 56 41 57 48 83 EC 70")
     #define BUILTIN_UWORLDSPAWNACTOR_PHOOK          ::LESDK::Address::FromPostHook(/* 48 8B C4 55 41 */ "54 41 55 41 56 41 57 48 8D 68 ?? 48 81 EC A0 00 00 00 48 C7 45 ?? FE FF FF FF 48 89 58 ?? 48 89 70 ?? 48 89 78 ?? 49 8B F9")
+    #define BUILTIN_EXEC_PHOOK                      ::LESDK::Address::FromPostHook(/* 48 8b c4 55 56 */ "57 41 54 41 55 41 56 41 57 48 8d a8 c8 fd ff ff 48 81 ec 20 03 00 00")
 
 #elif defined(SDK_TARGET_LE3)
 
@@ -163,5 +165,6 @@ namespace LESDK {
     #define BUILTIN_STATICALLOCATEOBJECT_PHOOK      ::LESDK::Address::FromPostHook(/* 4C 89 44 24 ?? */ "55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC 80 05 00 00")
     #define BUILTIN_STATICCONSTRUCTOBJECT_PHOOK     ::LESDK::Address::FromPostHook(/* 48 8B C4 48 89 */ "50 ?? 56 57 41 55 41 56 41 57 48 83 EC 70")
     #define BUILTIN_UWORLDSPAWNACTOR_PHOOK          ::LESDK::Address::FromPostHook(/* 48 8B C4 55 41 */ "54 41 55 41 56 41 57 48 8D 68 ?? 48 81 EC A0 00 00 00 48 C7 45 ?? FE FF FF FF 48 89 58 ?? 48 89 70 ?? 48 89 78 ?? 49 8B F9")
+    #define BUILTIN_EXEC_PHOOK                      ::LESDK::Address::FromPostHook(/* 48 8b c4 4c 89 */ "40 18 48 89 50 10 48 89 48 08 55 53 56 57 41 54 41 55 41 56 41 57 48 8d a8 58 fe ff ff")
 
 #endif
