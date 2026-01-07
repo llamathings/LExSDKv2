@@ -84,4 +84,43 @@ namespace LESDK {
         OutString.Append(L"(null)");
     }
 
+    template<class UObjectLike, bool WithRAII>
+    void AppendObjectFullPath(UObjectLike const* const InObject, FStringBase<WithRAII>& OutString,
+        SFXName::FormatMode const Mode = SFXName::k_formatInstanced)
+    {
+        if (InObject != nullptr) {
+
+            if (InObject->Outer != nullptr) {
+                if (InObject->Outer->Outer != nullptr) {
+                    if (InObject->Outer->Outer->Outer != nullptr) {
+                        //degenerate case, delegate to a recursive function
+                        AppendFullPathRecursive(InObject->Outer->Outer->Outer, OutString, Mode);
+                        OutString.Append(L".");
+                    }
+                    AppendObjectName(InObject->Outer->Outer, OutString, SFXName::k_formatBasic);
+                    OutString.Append(L".");
+                }
+                AppendObjectName(InObject->Outer, OutString, SFXName::k_formatBasic);
+                OutString.Append(L".");
+            }
+
+            AppendObjectName(InObject, OutString, Mode);
+            return;
+        }
+
+        OutString.Append(L"(null)");
+    }
+
+    template<class UObjectLike, bool WithRAII>
+    void AppendFullPathRecursive(UObjectLike const* const InObject, FStringBase<WithRAII>& OutString,
+        SFXName::FormatMode const Mode = SFXName::k_formatInstanced)
+    {
+            if (InObject->Outer != nullptr) {
+                AppendFullPathRecursive(InObject->Outer, OutString, Mode);
+                OutString.Append(L".");
+            }
+
+            AppendObjectName(InObject, OutString, Mode);
+    }
+
 }

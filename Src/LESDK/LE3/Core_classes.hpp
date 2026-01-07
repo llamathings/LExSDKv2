@@ -222,10 +222,13 @@ public:
     void AppendNameCPP(FString& OutString) const;
     void AppendFullName(FStringView& OutString, SFXName::FormatMode Mode) const;
     void AppendFullName(FString& OutString, SFXName::FormatMode Mode) const;
+    void AppendFullPath(FStringView& OutString, SFXName::FormatMode Mode) const;
+    void AppendFullPath(FString& OutString, SFXName::FormatMode Mode) const;
 
     FString GetName() const;
     FString GetNameCPP() const;
     FString GetFullName() const;
+    FString GetFullPath() const;
 
     FString const& StaticName() const;
     FString const& StaticNameCPP() const;

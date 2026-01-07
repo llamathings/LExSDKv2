@@ -55,6 +55,14 @@ void UObject::AppendFullName(FString& OutString, SFXName::FormatMode const Mode)
     ::LESDK::AppendObjectNameFull(this, OutString, Mode);
 }
 
+void UObject::AppendFullPath(FStringView& OutString, SFXName::FormatMode const Mode) const {
+    ::LESDK::AppendObjectFullPath(this, OutString, Mode);
+}
+
+void UObject::AppendFullPath(FString& OutString, SFXName::FormatMode const Mode) const {
+    ::LESDK::AppendObjectFullPath(this, OutString, Mode);
+}
+
 
 FString UObject::GetName() const {
     FString OutString{};
@@ -74,6 +82,13 @@ FString UObject::GetFullName() const {
     FString OutString{};
     OutString.Reserve(255);
     AppendFullName(OutString, SFXName::k_formatInstanced);
+    return OutString;
+}
+
+FString UObject::GetFullPath() const {
+    FString OutString{};
+    OutString.Reserve(255);
+    AppendFullPath(OutString, SFXName::k_formatInstanced);
     return OutString;
 }
 

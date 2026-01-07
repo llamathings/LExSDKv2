@@ -9,6 +9,7 @@
 // #include <cwchar>
 // #include <string>
 
+#include <format>
 #include "LESDK/Common/Core.hpp"
 #include "LESDK/Common/TArray.hpp"
 
@@ -569,3 +570,60 @@ inline bool operator!=(FString const& Lhs, FString const& Rhs) noexcept {
 
 static_assert(sizeof(FStringView) == 0x10);
 static_assert(sizeof(FString) == 0x10);
+
+
+// ! std::formatter specializations
+// ========================================
+
+template<bool WithRAII>
+struct std::formatter<FStringBase<WithRAII>, WCHAR> {
+    std::formatter<std::wstring_view, WCHAR> underlying;
+
+    constexpr auto parse(std::basic_format_parse_context<WCHAR>& ctx) {
+        return underlying.parse(ctx);
+    }
+
+    auto format(const FStringBase<WithRAII>& str, std::wformat_context& ctx) const {
+        return underlying.format(std::wstring_view(str.Chars(), str.Length()), ctx);
+    }
+};
+
+template<bool WithRAII>
+struct std::formatter<FStringBase<WithRAII>, char> {
+    std::formatter<std::string> underlying;
+
+    constexpr auto parse(std::format_parse_context& ctx) {
+        return underlying.parse(ctx);
+    }
+
+    auto format(const FStringBase<WithRAII>& str, std::format_context& ctx) const {
+        auto const wstr = str.Chars();
+        auto const wlen = str.Length();
+
+        if (wlen == 0) {
+            return underlying.format("", ctx);
+        }
+
+        auto const ansi_len = LESDK::GetAnsiLengthWide(wstr, wlen);
+        std::string ansi_str(ansi_len, '\0');
+
+        DWORD error = 0;
+        if (LESDK::EncodeAnsiFromWide(wstr, wlen, ansi_str.data(), ansi_len, &error)) {
+            return underlying.format(ansi_str, ctx);
+        }
+
+        return underlying.format("<encoding error>", ctx);
+    }
+};
+
+template<>
+struct std::formatter<FString, WCHAR> : std::formatter<FStringBase<true>, WCHAR> {};
+
+template<>
+struct std::formatter<FString, char> : std::formatter<FStringBase<true>, char> {};
+
+template<>
+struct std::formatter<FStringView, WCHAR> : std::formatter<FStringBase<false>, WCHAR> {};
+
+template<>
+struct std::formatter<FStringView, char> : std::formatter<FStringBase<false>, char> {};
