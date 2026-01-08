@@ -415,6 +415,30 @@ FStringBase<WithRAII>::operator*() const noexcept {
 }
 
 
+// ! Comparison operators for std::map support
+// ========================================
+
+template<bool WithRAII>
+inline bool operator<(FStringBase<WithRAII> const& Lhs, FStringBase<WithRAII> const& Rhs) noexcept {
+    return wcscmp(Lhs.Chars(), Rhs.Chars()) < 0;
+}
+
+template<bool WithRAII>
+inline bool operator<=(FStringBase<WithRAII> const& Lhs, FStringBase<WithRAII> const& Rhs) noexcept {
+    return wcscmp(Lhs.Chars(), Rhs.Chars()) <= 0;
+}
+
+template<bool WithRAII>
+inline bool operator>(FStringBase<WithRAII> const& Lhs, FStringBase<WithRAII> const& Rhs) noexcept {
+    return wcscmp(Lhs.Chars(), Rhs.Chars()) > 0;
+}
+
+template<bool WithRAII>
+inline bool operator>=(FStringBase<WithRAII> const& Lhs, FStringBase<WithRAII> const& Rhs) noexcept {
+    return wcscmp(Lhs.Chars(), Rhs.Chars()) >= 0;
+}
+
+
 /**
  * @brief   Dynamic string compatible with Unreal Engine, without RAII semantics.
  */
@@ -627,3 +651,21 @@ struct std::formatter<FStringView, WCHAR> : std::formatter<FStringBase<false>, W
 
 template<>
 struct std::formatter<FStringView, char> : std::formatter<FStringBase<false>, char> {};
+
+
+// ! std::hash specialization 
+// ========================================
+
+template<bool WithRAII>
+struct std::hash<FStringBase<WithRAII>> {
+    std::size_t operator()(FStringBase<WithRAII> const& str) const noexcept {
+        return LESDK::WideStringHashCI(str.Chars());
+    }
+};
+
+template<>
+struct std::hash<FString> : std::hash<FStringBase<true>> {};
+
+template<>
+struct std::hash<FStringView> : std::hash<FStringBase<false>> {};
+

@@ -202,7 +202,7 @@ public:
     class UObject*                  HashNext;                           // 0x0014 (0x08) - NOT AUTO-GENERATED PROPERTY 
     class UObject*                  HashOuterNext;                      // 0x001C (0x08) - NOT AUTO-GENERATED PROPERTY 
     struct FStateFrame*             StateFrame;                         // 0x0024 (0x08) - NOT AUTO-GENERATED PROPERTY 
-    class UObject*                  Linker;                             // 0x002C (0x08) - NOT AUTO-GENERATED PROPERTY 
+    class ULinker*                  Linker;                             // 0x002C (0x08) - NOT AUTO-GENERATED PROPERTY 
     long long                       LinkerIndex;                        // 0x0034 (0x08) - NOT AUTO-GENERATED PROPERTY 
     int                             NetIndex;                           // 0x003C (0x04) - NOT AUTO-GENERATED PROPERTY 
     class UObject*                  Outer;                              // 0x0040 (0x08) - NOT AUTO-GENERATED PROPERTY 
@@ -770,7 +770,9 @@ public:
 class ULinker : public UObject
 {
 public:
-	unsigned char                                      UnknownData00[ 0x150 ];                           		// 0x0060 (0x0150) MISSED OFFSET
+	unsigned char                                      UnknownData00[ 0x138 ];                           		// 0x0060 (0x0138) MISSED OFFSET
+	FString                                            Filename;                                         		// 0x0198 (0x0010)
+	unsigned char                                      UnknownData01[ 0x08 ];                            		// 0x01A8 (0x0008) MISSED OFFSET
 
 private:
 	static UClass* pClassPointer;
