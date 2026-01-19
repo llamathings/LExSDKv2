@@ -6998,8 +6998,16 @@ public:
 // 0x0034 (0x025C - 0x0228)
 class ULineBatchComponent : public UPrimitiveComponent
 {
+    struct FPrimitiveDrawInterfaceVTable
+    {
+        void* VirtualFunction_0x00;
+        void* VirtualFunction_0x08;
+        void* VirtualFunction_0x10;
+        void* VirtualFunction_0x18;
+        void (*DrawLine)(void* self, const FVector& start, const FVector& end, const FLinearColor& color, BYTE depth, const float thickness);
+    };
 public:
-	FPointer                                           FPrimitiveDrawInterfaceVfTable;                   		// 0x0228 (0x0008) [0x0000000000801002]              ( CPF_Const | CPF_Native | CPF_NoExport )
+    FPrimitiveDrawInterfaceVTable*                     FPrimitiveDrawInterfaceVfTable;                   		// 0x0228 (0x0008) [0x0000000000801002]              ( CPF_Const | CPF_Native | CPF_NoExport )
 	FPointer                                           FPrimitiveDrawInterfaceView;                      		// 0x0230 (0x0008) [0x0000000000801002]              ( CPF_Const | CPF_Native | CPF_NoExport )
 	TArray<FPointer>                                   BatchedLines;                                     		// 0x0238 (0x0010) [0x0000000000003002]              ( CPF_Const | CPF_Native | CPF_Transient )
 	TArray<FPointer>                                   BatchedPoints;                                    		// 0x0248 (0x0010) [0x0000000000003002]              ( CPF_Const | CPF_Native | CPF_Transient )
@@ -9686,7 +9694,8 @@ public:
 class ULevelBase : public UObject
 {
 public:
-	unsigned char                                      UnknownData00[ 0x70 ];                            		// 0x0060 (0x0070) MISSED OFFSET
+    TArray<AActor*>							   Actors;                                             		// 0x0060 (0x0010) [0x0000000000400000]              ( CPF_NeedCtorLink )
+    unsigned char                                      UnknownData00[0x60];                            		// 0x0070 (0x0060) MISSED OFFSET
 
 private:
 	static UClass* pClassPointer;
@@ -11522,20 +11531,32 @@ public:
 
 };
 
+struct FStaticMeshElement {
+    UMaterialInterface* Material;
+    unsigned char Unknown[0x48];
+};
+
+struct FStaticMeshRenderData {
+    unsigned char Unknown[0x1b0];
+    TArray<FStaticMeshElement> Elements;
+};
+
 // Class Engine.StaticMesh
 // 0x0130 (0x0190 - 0x0060)
 class UStaticMesh : public UObject
 {
 public:
-	unsigned char                                      UnknownData00[ 0x10 ];                            		// 0x0060 (0x0010) MISSED OFFSET
-	TArray<struct FStaticMeshLODInfo>                  LODInfo;                                          		// 0x0070 (0x0010) [0x0000000000001041]              ( CPF_Edit | CPF_EditConstArray | CPF_Native )
+    //Actual serialized data
+    TArray<FStaticMeshRenderData*>			   NativeLODInfo;                                           // 0x0060 (0x0010) [0x0000000000001031]              ( CPF_Edit | CPF_EditConstArray | CPF_Native )
+    //Will always be blank, DO NOT USE
+    TArray<struct FStaticMeshLODInfo>           Editor_LODInfo;                                          // 0x0070 (0x0010) [0x0000000000001041]              ( CPF_Edit | CPF_EditConstArray | CPF_Native )
 	float                                              LODDistanceRatio;                                 		// 0x0080 (0x0004) [0x0000000000000001]              ( CPF_Edit )
 	float                                              LODMaxRange;                                      		// 0x0084 (0x0004) [0x0000000000000001]              ( CPF_Edit )
 	unsigned char                                      UnknownData01[ 0x10 ];                            		// 0x0088 (0x0010) MISSED OFFSET
-	int                                                LightMapResolution;                               		// 0x0098 (0x0004) [0x0000000000000001]              ( CPF_Edit )
+    int                                                LightMapResolution;                               		// 0x0098 (0x0004) [0x0000000000000001]              ( CPF_Edit )
 	int                                                LightMapCoordinateIndex;                          		// 0x009C (0x0004) [0x0000000000000001]              ( CPF_Edit )
 	unsigned char                                      UnknownData02[ 0x40 ];                            		// 0x00A0 (0x0040) MISSED OFFSET
-	class URB_BodySetup*                               BodySetup;                                        		// 0x00E0 (0x0008) [0x0000000004000001]              ( CPF_Edit | CPF_EditInline )
+    class URB_BodySetup*                               BodySetup;                                        		// 0x00E0 (0x0008) [0x0000000004000001]              ( CPF_Edit | CPF_EditInline )
 	unsigned char                                      UnknownData03[ 0x3C ];                            		// 0x00E8 (0x003C) MISSED OFFSET
 	unsigned long                                      UseSimpleLineCollision : 1;                       		// 0x0124 (0x0004) [0x0000000000000001] [0x00000001] ( CPF_Edit )
 	unsigned long                                      UseSimpleBoxCollision : 1;                        		// 0x0128 (0x0004) [0x0000000000000001] [0x00000001] ( CPF_Edit )
@@ -11881,7 +11902,10 @@ public:
 class UWorld : public UObject
 {
 public:
-	unsigned char                                      UnknownData00[ 0x34C ];                           		// 0x0060 (0x034C) MISSED OFFSET
+    unsigned char                                      UnknownData00[0x178];                           		// 0x0060 (0x0178) MISSED OFFSET
+    ULineBatchComponent* LineBatcher;                                                                       // 0x01D8 (0x0008) MISSED OFFSET
+    ULineBatchComponent* PersistentLineBatcher;                                                             // 0x01E0 (0x0008) MISSED OFFSET
+    unsigned char                                      UnknownData01[0x1C4];                           		// 0x01E8 (0x01C4) MISSED OFFSET
 
 private:
 	static UClass* pClassPointer;

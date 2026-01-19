@@ -87,6 +87,7 @@ set (PROJ_SRCS_SHARED
   ${SRCS_ROOT}/Common/SFXName.hpp
   ${SRCS_ROOT}/Common/TArray.hpp
   ${SRCS_ROOT}/Common/TMap.hpp
+  ${SRCS_ROOT}/Common/Math.hpp
 
   ${SRCS_ROOT}/Common/Common.cpp
   ${SRCS_ROOT}/Common/Common.hpp

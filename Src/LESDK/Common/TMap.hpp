@@ -366,7 +366,17 @@ public:
         return Id;
     }
 
-    ElementType const* Find(KeyType const Key) const {
+    ElementType* Find(KeyType const Key) {
+        FSetElementId const Id = FindId(Key);
+        if (Id.IsValidId()) {
+            return &Elements(Id).Value;
+        }
+        else {
+            return nullptr;
+        }
+    }
+
+    ElementType const * Find(KeyType const Key) const {
         FSetElementId const Id = FindId(Key);
         if (Id.IsValidId()) {
             return &Elements(Id).Value;
@@ -496,10 +506,15 @@ class TMap final {
 
 public:
 
-    TValue& Set(TKey& Key, TValue& Value) {
+    TValue* Set(TKey& Key, TValue& Value) {
         FPair Pair(Key, Value);
         FSetElementId const Id = Pairs.Add(Pair);
-        return Pairs(Id).Value;
+        return &Pairs(Id).Value;
+    }
+
+    TValue* Find(TKey&& Key) {
+        FPair* const Pair = Pairs.Find(Key);
+        return Pair ? &Pair->Value : nullptr;
     }
 
     TValue const* Find(TKey&& Key) const {

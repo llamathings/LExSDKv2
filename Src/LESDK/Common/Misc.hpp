@@ -64,16 +64,21 @@ namespace LESDK {
         SFXName::FormatMode const Mode = SFXName::k_formatInstanced)
     {
         if (InObject->Class != nullptr) {
-            AppendObjectName(InObject->Class, OutString, SFXName::k_formatBasic);
+            AppendObjectName(InObject->Class, OutString, Mode);
             OutString.Append(L" ");
 
             if (InObject->Outer != nullptr) {
                 if (InObject->Outer->Outer != nullptr) {
-                    AppendObjectName(InObject->Outer->Outer, OutString, SFXName::k_formatBasic);
+                    if (InObject->Outer->Outer->Outer != nullptr) {
+                        //degenerate case, delegate to a recursive function
+                        AppendFullPathRecursive(InObject->Outer->Outer->Outer, OutString, Mode);
+                        OutString.Append(L".");
+                    }
+                    AppendObjectName(InObject->Outer->Outer, OutString, Mode);
                     OutString.Append(L".");
                 }
 
-                AppendObjectName(InObject->Outer, OutString, SFXName::k_formatBasic);
+                AppendObjectName(InObject->Outer, OutString, Mode);
                 OutString.Append(L".");
             }
 
@@ -97,10 +102,10 @@ namespace LESDK {
                         AppendFullPathRecursive(InObject->Outer->Outer->Outer, OutString, Mode);
                         OutString.Append(L".");
                     }
-                    AppendObjectName(InObject->Outer->Outer, OutString, SFXName::k_formatBasic);
+                    AppendObjectName(InObject->Outer->Outer, OutString, Mode);
                     OutString.Append(L".");
                 }
-                AppendObjectName(InObject->Outer, OutString, SFXName::k_formatBasic);
+                AppendObjectName(InObject->Outer, OutString, Mode);
                 OutString.Append(L".");
             }
 

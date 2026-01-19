@@ -442,3 +442,5 @@ tNative**               GNatives = nullptr;
 UEngine**               GEngine = nullptr;
 USystem**               GSys = nullptr;
 UWorld**                GWorld = nullptr;
+
+void**                  GError = nullptr;

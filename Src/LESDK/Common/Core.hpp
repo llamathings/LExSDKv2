@@ -199,6 +199,9 @@ extern UEngine**        GEngine;
 extern USystem**        GSys;
 extern UWorld**         GWorld;
 
+//should be FOutputDevice**, but that is not defined yet
+extern void**           GError;
+
 
 // ! Macro for using the location property of AActor, FTPOV, maybe some others?
 

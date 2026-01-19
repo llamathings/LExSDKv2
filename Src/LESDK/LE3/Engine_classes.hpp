@@ -3871,7 +3871,7 @@ public:
 	void SetZone ( unsigned long bForceRefresh );
 	unsigned char MovingWhichWay ( float* Amount );
 	bool SetRotation ( struct FRotator const& NewRotation );
-	bool SetLocation ( struct FVector const& NewLocation, unsigned long bDebugFailure );
+	bool SetLocation ( struct FVector const& NewLocation, unsigned long bDebugFailure = false);
 	bool Move ( struct FVector const& Delta );
 	void SetDrawScale3D ( struct FVector const& NewScale3D );
 	void SetDrawScale ( float NewScale );
@@ -7009,8 +7009,16 @@ public:
 // 0x0034 (0x0258 - 0x0224)
 class ULineBatchComponent : public UPrimitiveComponent
 {
+    struct FPrimitiveDrawInterfaceVTable
+    {
+        void* VirtualFunction_0x00;
+        void* VirtualFunction_0x08;
+        void* VirtualFunction_0x10;
+        void* VirtualFunction_0x18;
+        void (*DrawLine)(void* self, const FVector& start, const FVector& end, const FLinearColor& color, BYTE depth, const float thickness);
+    };
 public:
-	FPointer                                           FPrimitiveDrawInterfaceVfTable;                   		// 0x0224 (0x0008) [0x0000000000801002]              ( CPF_Const | CPF_Native | CPF_NoExport )
+    FPrimitiveDrawInterfaceVTable*                     FPrimitiveDrawInterfaceVfTable;                   		// 0x0224 (0x0008) [0x0000000000801002]              ( CPF_Const | CPF_Native | CPF_NoExport )
 	FPointer                                           FPrimitiveDrawInterfaceView;                      		// 0x022C (0x0008) [0x0000000000801002]              ( CPF_Const | CPF_Native | CPF_NoExport )
 	TArray<FPointer>                                   BatchedLines;                                     		// 0x0234 (0x0010) [0x0000000000003002]              ( CPF_Const | CPF_Native | CPF_Transient )
 	TArray<FPointer>                                   BatchedPoints;                                    		// 0x0244 (0x0010) [0x0000000000003002]              ( CPF_Const | CPF_Native | CPF_Transient )
@@ -9633,7 +9641,8 @@ public:
 class ULevelBase : public UObject
 {
 public:
-	unsigned char                                      UnknownData00[ 0x70 ];                            		// 0x0060 (0x0070) MISSED OFFSET
+    TArray<AActor*>							   Actors;                                             		// 0x0060 (0x0010) [0x0000000000400000]              ( CPF_NeedCtorLink )
+    unsigned char                                      UnknownData00[0x60];                            		// 0x0070 (0x0060) MISSED OFFSET
 
 private:
 	static UClass* pClassPointer;
@@ -11532,13 +11541,25 @@ public:
 
 };
 
+struct FStaticMeshElement {
+    UMaterialInterface* Material;
+    unsigned char Unknown[0x48];
+};
+
+struct FStaticMeshRenderData {
+    unsigned char Unknown[0x1b0];
+    TArray<FStaticMeshElement> Elements;
+};
+
 // Class Engine.StaticMesh
 // 0x0130 (0x0190 - 0x0060)
 class UStaticMesh : public UObject
 {
 public:
-	unsigned char                                      UnknownData00[ 0x10 ];                            		// 0x0060 (0x0010) MISSED OFFSET
-	TArray<struct FStaticMeshLODInfo>                  LODInfo;                                          		// 0x0070 (0x0010) [0x0000000000001041]              ( CPF_Edit | CPF_EditConstArray | CPF_Native )
+    //Actual serialized data
+    TArray<FStaticMeshRenderData*>			   NativeLODInfo;                                           // 0x0060 (0x0010) [0x0000000000001031]              ( CPF_Edit | CPF_EditConstArray | CPF_Native )
+    //Will always be blank, DO NOT USE
+    TArray<struct FStaticMeshLODInfo>           Editor_LODInfo;                                          // 0x0070 (0x0010) [0x0000000000001041]              ( CPF_Edit | CPF_EditConstArray | CPF_Native )
 	float                                              LODDistanceRatio;                                 		// 0x0080 (0x0004) [0x0000000000000001]              ( CPF_Edit )
 	float                                              LODMaxRange;                                      		// 0x0084 (0x0004) [0x0000000000000001]              ( CPF_Edit )
 	unsigned char                                      UnknownData01[ 0x10 ];                            		// 0x0088 (0x0010) MISSED OFFSET
@@ -11888,7 +11909,50 @@ public:
 class UWorld : public UObject
 {
 public:
-	unsigned char                                      UnknownData00[ 0x338 ];                           		// 0x0060 (0x0338) MISSED OFFSET
+    // Note: 01/09/2024 Mgamerz
+    // Offsets for objects here were calculated using EmitObjectReference in static constructor hooks
+    // Some objects were not loaded so they could not have their type determined.
+    /*
+     *World OBJARRREF 78
+    World OBJREF 88
+    World OBJREF 90
+    World OBJREF 98
+    World OBJREF a0
+    World OBJREF 118
+    World OBJREF 120
+    World OBJREF 180
+    World OBJARRREF 1b0
+    World OBJREF 1d8 LineBatch (SDK)
+    World OBJREF 1e0 LineBatch (SDK)
+    World OBJARRREF 204
+    World OBJARRREF 214
+    World OBJARRREF 360
+    */
+    unsigned char                                      UnknownData00[0x18];     // 0x0060 (0x078) MISSED OFFSET
+    TArray<ULevel*> Levels;                                                     // 0x78 (Size 0x10)
+    ULevel* PersistentLevel;                                                    // 0x88 (Size 0x8)
+    UObject*                                           UnknownPointer90;        // 0x90 (Size 0x8)
+    ULevel* CurrentLevel;		                                                // 0x98 (Size 0x8)
+    UObject*                                           UnknownPointerA0;        // 0xA0 (Size 0x08)
+    unsigned char                                      UnknownData01[0x70];     // 0xA8 - 0x118
+    UObject*                                           UnknownPointer118;	    // 0x118 (Size 0x8)
+    UNetDriver* NetDriver;                                                      // 0x120 (Size 0x8)
+    unsigned char                                      UnknownData02[0x58];     // 0x128 - 0x180
+    UObject*                                           UnknownPointer180;       // 0x180 (Size 0x8)
+    unsigned char                                      UnknownData03[0x28];     // 0x188 - 0x1b0
+    TArray<UObject*>								   UnknownArrayPointer1b0;  // 0x1b0 (Size 0x10)
+    unsigned char                                      UnknownData04[0x18];     // 0x1C0 - 0x1D8
+    ULineBatchComponent* LineBatcher;                                           // 0x01D8 (0x0008) MISSED OFFSET
+    ULineBatchComponent* PersistentLineBatcher;                                 // 0x01E0 (0x0008) MISSED OFFSET
+    unsigned char                                      UnknownData05[0x18];     // 0x1C0 - 0x1D8
+    TArray<UObject*>								   UnknownArrayPointer204;  // 0x204 (Size 0x10)
+    TArray<UObject*>						 		   UnknownArrayPointer214;  // 0x214 (Size 0x10)
+    unsigned char                                      UnknownData06[0x144];    // 0x21C - 0x360
+    TArray<UObject*>								   UnknownArrayPointer360;  // 0x360 (Size 0x10)
+    unsigned char                                      UnknownData07[0x28];     // 0x370 - 0x398
+
+    // Document offsets noted in Ghidra here
+    // 0x2D8 = DominantDirectionalLight (UDominantDirectionalLightComponent*)
 
 private:
 	static UClass* pClassPointer;

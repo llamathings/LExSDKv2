@@ -7328,8 +7328,16 @@ public:
 // 0x0034 (0x0254 - 0x0220)
 class ULineBatchComponent : public UPrimitiveComponent
 {
+    struct FPrimitiveDrawInterfaceVTable
+    {
+        void* VirtualFunction_0x00;
+        void* VirtualFunction_0x08;
+        void* VirtualFunction_0x10;
+        void* VirtualFunction_0x18;
+        void (*DrawLine)(void* self, const FVector& start, const FVector& end, const FLinearColor& color, BYTE depth, const float thickness);
+    };
 public:
-	FPointer                                           FPrimitiveDrawInterfaceVfTable;                   		// 0x0220 (0x0008) [0x0000000000801002]              ( CPF_Const | CPF_Native | CPF_NoExport )
+    FPrimitiveDrawInterfaceVTable*                     FPrimitiveDrawInterfaceVfTable;                   		// 0x0220 (0x0008) [0x0000000000801002]              ( CPF_Const | CPF_Native | CPF_NoExport )
 	FPointer                                           FPrimitiveDrawInterfaceView;                      		// 0x0228 (0x0008) [0x0000000000801002]              ( CPF_Const | CPF_Native | CPF_NoExport )
 	TArray<FPointer>                                   BatchedLines;                                     		// 0x0230 (0x0010) [0x0000000000003002]              ( CPF_Const | CPF_Native | CPF_Transient )
 	TArray<FPointer>                                   BatchedPoints;                                    		// 0x0240 (0x0010) [0x0000000000003002]              ( CPF_Const | CPF_Native | CPF_Transient )
@@ -10191,7 +10199,8 @@ public:
 class ULevelBase : public UObject
 {
 public:
-	unsigned char                                      UnknownData00[ 0x70 ];                            		// 0x0060 (0x0070) MISSED OFFSET
+    TArray<AActor*>							   Actors;                                             		// 0x0060 (0x0010) [0x0000000000400000]              ( CPF_NeedCtorLink )
+    unsigned char                                      UnknownData00[0x60];                            		// 0x0070 (0x0060) MISSED OFFSET
 
 private:
 	static UClass* pClassPointer;
@@ -12135,6 +12144,7 @@ class UStaticMesh : public UObject
 {
 public:
 	unsigned char                                      UnknownData00[ 0x10 ];                            		// 0x0060 (0x0010) MISSED OFFSET
+    //unlike in LE3 and LE2,this actually contains the runtime data
 	TArray<struct FStaticMeshLODInfo>                  LODInfo;                                          		// 0x0070 (0x0010) [0x0000000000001041]              ( CPF_Edit | CPF_EditConstArray | CPF_Native )
 	float                                              LODDistanceRatio;                                 		// 0x0080 (0x0004) [0x0000000000000001]              ( CPF_Edit )
 	float                                              LODMaxRange;                                      		// 0x0084 (0x0004) [0x0000000000000001]              ( CPF_Edit )
@@ -12389,7 +12399,10 @@ public:
 class UWorld : public UObject
 {
 public:
-	unsigned char                                      UnknownData00[ 0x3F4 ];                           		// 0x0060 (0x03F4) MISSED OFFSET
+    unsigned char                                      UnknownData00[0x178];                           		// 0x0060 (0x0178) MISSED OFFSET
+    ULineBatchComponent* LineBatcher;                                                                       // 0x01D8 (0x0008) MISSED OFFSET
+    ULineBatchComponent* PersistentLineBatcher;                                                             // 0x01E0 (0x0008) MISSED OFFSET
+    unsigned char                                      UnknownData01[0x26C];                           		// 0x01E8 (0x026C) MISSED OFFSET
 
 private:
 	static UClass* pClassPointer;

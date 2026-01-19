@@ -63,3 +63,6 @@
 #if defined(SDK_TARGET_LE3)
     #include "LESDK/Includes.LE3.hpp"
 #endif
+
+
+#include "LESDK/Common/Math.hpp"

@@ -130,5 +130,15 @@ inline FString SFXName::ToString(FormatMode const Mode) const {
     return OutString;
 }
 
+// ! std::hash specialization 
+// ========================================
+
+template<>
+struct std::hash<SFXName> {
+    std::size_t operator()(SFXName const& name) const noexcept {
+        return GetTypeHash(name);
+    }
+};
+
 
 #pragma pack(pop)
