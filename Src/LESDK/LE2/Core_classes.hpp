@@ -172,7 +172,7 @@ public:
     class UObject*                  HashNext;                           // 0x0014 (0x08) - NOT AUTO-GENERATED PROPERTY 
     class UObject*                  HashOuterNext;                      // 0x001C (0x08) - NOT AUTO-GENERATED PROPERTY 
     struct FStateFrame*             StateFrame;                         // 0x0024 (0x08) - NOT AUTO-GENERATED PROPERTY 
-    class Ulinker*                  Linker;                             // 0x002C (0x08) - NOT AUTO-GENERATED PROPERTY 
+    class ULinker*                  Linker;                             // 0x002C (0x08) - NOT AUTO-GENERATED PROPERTY 
     long long                       LinkerIndex;                        // 0x0034 (0x08) - NOT AUTO-GENERATED PROPERTY 
     int                             NetIndex;                           // 0x003C (0x04) - NOT AUTO-GENERATED PROPERTY 
     class UObject*                  Outer;                              // 0x0040 (0x08) - NOT AUTO-GENERATED PROPERTY 
