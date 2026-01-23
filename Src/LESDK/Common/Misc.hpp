@@ -23,6 +23,22 @@ struct FRepRecord final {
 };
 static_assert(sizeof(FRepRecord) == 0x0C);
 
+// ! Common native structs
+struct FObjectResource
+{
+    SFXName ObjectName;
+    int	OuterIndex;
+};
+
+struct FObjectImport : public FObjectResource
+{
+    SFXName ClassPackage;
+    SFXName ClassName;
+    UObject* Object;
+    ULinkerLoad* SourceLinker;
+    int SourceIndex;
+};
+
 #pragma pack(pop)
 
 

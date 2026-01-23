@@ -130,7 +130,8 @@ namespace LESDK {
     #define BUILTIN_STATICCONSTRUCTOBJECT_PHOOK     ::LESDK::Address::FromPostHook(/* 48 8B C4 4C 89 */ "40 ?? 56 57 41 54 41 56 41 57 48 83 EC 70")
     #define BUILTIN_UWORLDSPAWNACTOR_PHOOK          ::LESDK::Address::FromPostHook(/* 48 8B C4 55 41 */ "54 41 55 41 56 41 57 48 8D 68 ?? 48 81 EC B0 00 00 00 48 C7 45 ?? FE FF FF FF 48 89 58 ?? 48 89 70 ?? 48 89 78 ?? 49 8B F9")
     #define BUILTIN_EXEC_PHOOK                      ::LESDK::Address::FromPostHook(/* 48 8b c4 48 89 */ "50 10 55 56 57 41 54 41 55 41 56 41 57 48 8d a8 d8 fe ff ff 48 81 ec f0 01 00 00 48 c7 45 60 fe ff ff ff")
-
+    #define BUILTIN_VERIFYIMPORT_RVA                ::LESDK::Address::FromOffset(0x13f280)
+    #define BUILTIN_CREATEEXPORT_RVA                ::LESDK::Address::FromOffset(0x1354a0)
 
 #elif defined(SDK_TARGET_LE2)
 
