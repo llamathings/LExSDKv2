@@ -151,7 +151,8 @@ namespace LESDK {
     #define BUILTIN_STATICCONSTRUCTOBJECT_PHOOK     ::LESDK::Address::FromPostHook(/* 48 8B C4 48 89 */ "50 ?? 56 57 41 55 41 56 41 57 48 83 EC 70")
     #define BUILTIN_UWORLDSPAWNACTOR_PHOOK          ::LESDK::Address::FromPostHook(/* 48 8B C4 55 41 */ "54 41 55 41 56 41 57 48 8D 68 ?? 48 81 EC A0 00 00 00 48 C7 45 ?? FE FF FF FF 48 89 58 ?? 48 89 70 ?? 48 89 78 ?? 49 8B F9")
     #define BUILTIN_EXEC_PHOOK                      ::LESDK::Address::FromPostHook(/* 48 8b c4 55 56 */ "57 41 54 41 55 41 56 41 57 48 8d a8 c8 fd ff ff 48 81 ec 20 03 00 00")
-
+    #define BUILTIN_VERIFYIMPORT_RVA                ::LESDK::Address::FromOffset(0xe05b0)
+    #define BUILTIN_CREATEEXPORT_RVA                ::LESDK::Address::FromOffset(0xdfad0)
 #elif defined(SDK_TARGET_LE3)
 
     #define BUILTIN_CALLFUNCTION_PHOOK              ::LESDK::Address::FromPostHook(/* 40 55 53 56 57 */ "41 54 41 55 41 56 41 57 48 81 EC A8 04 00 00 48 8D 6C 24 20 48 C7 45 68 FE FF FF FF")
@@ -170,5 +171,6 @@ namespace LESDK {
     #define BUILTIN_STATICCONSTRUCTOBJECT_PHOOK     ::LESDK::Address::FromPostHook(/* 48 8B C4 48 89 */ "50 ?? 56 57 41 55 41 56 41 57 48 83 EC 70")
     #define BUILTIN_UWORLDSPAWNACTOR_PHOOK          ::LESDK::Address::FromPostHook(/* 48 8B C4 55 41 */ "54 41 55 41 56 41 57 48 8D 68 ?? 48 81 EC A0 00 00 00 48 C7 45 ?? FE FF FF FF 48 89 58 ?? 48 89 70 ?? 48 89 78 ?? 49 8B F9")
     #define BUILTIN_EXEC_PHOOK                      ::LESDK::Address::FromPostHook(/* 48 8b c4 4c 89 */ "40 18 48 89 50 10 48 89 48 08 55 53 56 57 41 54 41 55 41 56 41 57 48 8d a8 58 fe ff ff")
-
+    #define BUILTIN_VERIFYIMPORT_RVA                ::LESDK::Address::FromOffset(0x105c10)
+    #define BUILTIN_CREATEEXPORT_RVA                ::LESDK::Address::FromOffset(0xfbdd0)
 #endif
