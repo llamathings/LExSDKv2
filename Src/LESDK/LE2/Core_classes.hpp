@@ -741,10 +741,22 @@ public:
 class ULinker : public UObject
 {
 public:
-	unsigned char                                      UnknownData00[ 0x134 ];                           		// 0x0060 (0x0134) MISSED OFFSET
+    class UPackage* LinkerRoot;                                              // 0x0060 (0x0008)
+    unsigned char                                      UnknownData00[0xA4];                           		// 0x0068 (0x00A4) MISSED OFFSET
+    TArray<SFXName>                                    NameMap;                                                 // 0x011C (0x0010)
+    TArray<FObjectImport>                              ImportMap;                                               // 0x011C (0x0010)
+    TArray<FObjectExport>                              ExportMap;                                               // 0x011C (0x0010)
+    unsigned char                                      UnknownData01[0x58]; // already subbed 12                           		// 0x012C (0x0068) MISSED OFFSET
+    FString                                            Filename;                                                // 0x0194 (0x0010)
+    unsigned char                                      UnknownData02[0x8];                           		    // 0x01A4 (0x0008) MISSED OFFSET
+
+
+    // Original Code
+    /*
+    unsigned char                                      UnknownData00[ 0x134 ];                           		// 0x0060 (0x0134) MISSED OFFSET
 	FString                                            Filename;                                         		// 0x0194 (0x0010)
 	unsigned char                                      UnknownData01[ 0x08 ];                            		// 0x01A4 (0x0008) MISSED OFFSET
-
+    */
 private:
 	static UClass* pClassPointer;
 

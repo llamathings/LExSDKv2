@@ -35,8 +35,31 @@ struct FObjectImport : public FObjectResource
     SFXName ClassPackage;
     SFXName ClassName;
     UObject* Object;
-    ULinkerLoad* SourceLinker;
+    class ULinkerLoad* SourceLinker;
     int SourceIndex;
+};
+
+// From v1 LE2 SDK
+struct FObjectExport : public FObjectResource
+{
+    int ClassIndex;
+    int SuperclassIndex;
+    int ArchetypeIndex;
+    long long ObjectFlags;
+    int SerialSize;
+    int DataOffset;
+
+    int unk1;
+    int unk2;
+
+    class UObject* Object; // The loaded object
+    int next;
+
+    int ExportFlags;
+    TArray<INT> GenerationsObjectCount;
+    //FGuid PackageGuid;
+    unsigned char PackageGuid[0x10]; // FGuid won't compile here!!!!
+    int PackageFlags;
 };
 
 #pragma pack(pop)
