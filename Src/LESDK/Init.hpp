@@ -132,6 +132,8 @@ namespace LESDK {
     #define BUILTIN_EXEC_PHOOK                      ::LESDK::Address::FromPostHook(/* 48 8b c4 48 89 */ "50 10 55 56 57 41 54 41 55 41 56 41 57 48 8d a8 d8 fe ff ff 48 81 ec f0 01 00 00 48 c7 45 60 fe ff ff ff")
     #define BUILTIN_VERIFYIMPORT_RVA                ::LESDK::Address::FromOffset(0x13f280)
     #define BUILTIN_CREATEEXPORT_RVA                ::LESDK::Address::FromOffset(0x1354a0)
+    #define BUILTIN_LOADPACKAGE_RVA                 ::LESDK::Address::FromOffset(0x166650)
+    #define BUILTIN_LOADPACKAGEASYNCTICK_RVA        ::LESDK::Address::FromOffset(0xfbb80)
 
 #elif defined(SDK_TARGET_LE2)
 
@@ -153,6 +155,8 @@ namespace LESDK {
     #define BUILTIN_EXEC_PHOOK                      ::LESDK::Address::FromPostHook(/* 48 8b c4 55 56 */ "57 41 54 41 55 41 56 41 57 48 8d a8 c8 fd ff ff 48 81 ec 20 03 00 00")
     #define BUILTIN_VERIFYIMPORT_RVA                ::LESDK::Address::FromOffset(0xe05b0)
     #define BUILTIN_CREATEEXPORT_RVA                ::LESDK::Address::FromOffset(0xdfad0)
+    #define BUILTIN_LOADPACKAGE_RVA                 ::LESDK::Address::FromOffset(0x10f5f0)
+    #define BUILTIN_LOADPACKAGEASYNCTICK_RVA        ::LESDK::Address::FromOffset(0xa7c20)
 #elif defined(SDK_TARGET_LE3)
 
     #define BUILTIN_CALLFUNCTION_PHOOK              ::LESDK::Address::FromPostHook(/* 40 55 53 56 57 */ "41 54 41 55 41 56 41 57 48 81 EC A8 04 00 00 48 8D 6C 24 20 48 C7 45 68 FE FF FF FF")
@@ -173,4 +177,6 @@ namespace LESDK {
     #define BUILTIN_EXEC_PHOOK                      ::LESDK::Address::FromPostHook(/* 48 8b c4 4c 89 */ "40 18 48 89 50 10 48 89 48 08 55 53 56 57 41 54 41 55 41 56 41 57 48 8d a8 58 fe ff ff")
     #define BUILTIN_VERIFYIMPORT_RVA                ::LESDK::Address::FromOffset(0x105c10)
     #define BUILTIN_CREATEEXPORT_RVA                ::LESDK::Address::FromOffset(0xfbdd0)
+    #define BUILTIN_LOADPACKAGE_RVA                 ::LESDK::Address::FromOffset(0x12b250)
+    #define BUILTIN_LOADPACKAGEASYNCTICK_RVA        ::LESDK::Address::FromOffset(0xc3340)
 #endif
