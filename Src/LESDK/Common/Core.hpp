@@ -215,4 +215,7 @@ extern void**           GError;
 
 #define LOCATION location
 
-#endif 
+#endif
+
+// Address macros
+#define LEASI_RVA(RVA) ::LESDK::Address::FromOffset(RVA)
