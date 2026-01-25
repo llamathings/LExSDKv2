@@ -117,7 +117,7 @@ namespace LESDK {
     #define BUILTIN_CALLFUNCTION_PHOOK              ::LESDK::Address::FromPostHook(/* 40 55 53 56 57 */ "41 54 41 55 41 56 41 57 48 81 EC A8 04 00 00 48 8D 6C 24 20 48 C7 45 68 FE FF FF FF")
     #define BUILTIN_GENGINE_RIP                     ::LESDK::Address::FromInstrRelative("48 8B 05 ?? ?? ?? ?? 83 A0 ?? ?? ?? ?? DF E8")
     #define BUILTIN_GMALLOC_RIP                     ::LESDK::Address::FromInstrRelative("48 8B 0D ?? ?? ?? ?? 48 8B 01 44 8B C3 48 8B D7")
-    #define BUILTIN_GNATIVES_RIP                    ::LESDK::Address::FromInstrRelative("48 8D 0D ?? ?? ?? ?? 48 8B 04 ?? E9")
+    #define BUILTIN_GNATIVES_RIP                    ::LESDK::Address::FromOffset(0x16dd3c0)
     #define BUILTIN_GOBOBJECTS_RIP                  ::LESDK::Address::FromInstrRelative("48 8B 05 ?? ?? ?? ?? 4D 8B 0C ?? 4D 85 C9")
     #define BUILTIN_GSYS_RIP                        ::LESDK::Address::FromInstrRelative("48 8B 05 ?? ?? ?? ?? 83 B8 ?? ?? ?? ?? 00 74 ?? 48 8B B8 ?? ?? ?? ?? 48 8D 05")
     #define BUILTIN_GWORLD_RIP                      ::LESDK::Address::FromInstrRelative("48 8B 0D ?? ?? ?? ?? E8 ?? ?? ?? ?? 85 C0 0F 84 ?? ?? ?? ?? 33 D2")
@@ -134,9 +134,12 @@ namespace LESDK {
     #define BUILTIN_CREATEEXPORT_RVA                ::LESDK::Address::FromOffset(0x1354a0)
     #define BUILTIN_LOADPACKAGE_RVA                 ::LESDK::Address::FromOffset(0x166650)
     #define BUILTIN_LOADPACKAGEASYNCTICK_RVA        ::LESDK::Address::FromOffset(0xfbb80)
+    #define BUILTIN_STATICALLOCATEOBJECT_RVA        ::LESDK::Address::FromOffset(0x16bb10)
+    #define BUILTIN_OBJECT_LOGINTERNAL_RVA          ::LESDK::Address::FromOffset(0x11de70)
+    #define BUILTIN_APPLOGF_RVA                     ::LESDK::Address::FromOffset(0x14ec50)
+    #define BUILTIN_APPERRORLOGF_RVA                ::LESDK::Address::FromOffset(0x14eb60)
 
 #elif defined(SDK_TARGET_LE2)
-
     #define BUILTIN_CALLFUNCTION_PHOOK              ::LESDK::Address::FromPostHook(/* 40 55 53 56 57 */ "41 54 41 55 41 56 41 57 48 81 EC A8 04 00 00 48 8D 6C 24 20 48 C7 45 68 FE FF FF FF")
     #define BUILTIN_GENGINE_RIP                     ::LESDK::Address::FromInstrRelative("48 8B 05 ?? ?? ?? ?? 83 A0 ?? ?? ?? ?? DF")
     #define BUILTIN_GMALLOC_RIP                     ::LESDK::Address::FromInstrRelative("48 8B 0D ?? ?? ?? ?? 48 8B 01 44 8B C3 48 8B D7")
@@ -157,6 +160,10 @@ namespace LESDK {
     #define BUILTIN_CREATEEXPORT_RVA                ::LESDK::Address::FromOffset(0xdfad0)
     #define BUILTIN_LOADPACKAGE_RVA                 ::LESDK::Address::FromOffset(0x10f5f0)
     #define BUILTIN_LOADPACKAGEASYNCTICK_RVA        ::LESDK::Address::FromOffset(0xa7c20)
+    #define BUILTIN_STATICALLOCATEOBJECT_RVA        ::LESDK::Address::FromOffset(0x114c40)
+    #define BUILTIN_OBJECT_LOGINTERNAL_RVA          ::LESDK::Address::FromOffset(0xc6a10)
+    #define BUILTIN_APPLOGF_RVA                     ::LESDK::Address::FromOffset(0xf77b0)
+    #define BUILTIN_APPERRORLOGF_RVA                ::LESDK::Address::FromOffset(0xf76c0)
 #elif defined(SDK_TARGET_LE3)
 
     #define BUILTIN_CALLFUNCTION_PHOOK              ::LESDK::Address::FromPostHook(/* 40 55 53 56 57 */ "41 54 41 55 41 56 41 57 48 81 EC A8 04 00 00 48 8D 6C 24 20 48 C7 45 68 FE FF FF FF")
@@ -179,4 +186,10 @@ namespace LESDK {
     #define BUILTIN_CREATEEXPORT_RVA                ::LESDK::Address::FromOffset(0xfbdd0)
     #define BUILTIN_LOADPACKAGE_RVA                 ::LESDK::Address::FromOffset(0x12b250)
     #define BUILTIN_LOADPACKAGEASYNCTICK_RVA        ::LESDK::Address::FromOffset(0xc3340)
+    #define BUILTIN_STATICALLOCATEOBJECT_RVA        ::LESDK::Address::FromOffset(0x130350)
+
+    #define BUILTIN_OBJECT_LOGINTERNAL_RVA          ::LESDK::Address::FromOffset(0xe1d50)
+    #define BUILTIN_APPLOGF_RVA                     ::LESDK::Address::FromOffset(0x113160)
+    #define BUILTIN_APPERRORLOGF_RVA                ::LESDK::Address::FromOffset(0x113250)
+
 #endif
