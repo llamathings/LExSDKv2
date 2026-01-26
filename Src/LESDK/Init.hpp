@@ -136,8 +136,8 @@ namespace LESDK {
     #define BUILTIN_LOADPACKAGEASYNCTICK_RVA        ::LESDK::Address::FromOffset(0xfbb80)
     #define BUILTIN_STATICALLOCATEOBJECT_RVA        ::LESDK::Address::FromOffset(0x16bb10)
     #define BUILTIN_OBJECT_LOGINTERNAL_RVA          ::LESDK::Address::FromOffset(0x11de70)
-    #define BUILTIN_APPLOGF_RVA                     ::LESDK::Address::FromOffset(0x14ec50)
-    #define BUILTIN_APPERRORLOGF_RVA                ::LESDK::Address::FromOffset(0x14eb60)
+    #define BUILTIN_APPLOGF_RVA                     ::LESDK::Address::FromOffset(0x14eb60)
+    #define BUILTIN_APPERRORLOGF_RVA                ::LESDK::Address::FromOffset(0x14ec50)
 
 #elif defined(SDK_TARGET_LE2)
     #define BUILTIN_CALLFUNCTION_PHOOK              ::LESDK::Address::FromPostHook(/* 40 55 53 56 57 */ "41 54 41 55 41 56 41 57 48 81 EC A8 04 00 00 48 8D 6C 24 20 48 C7 45 68 FE FF FF FF")
@@ -162,8 +162,8 @@ namespace LESDK {
     #define BUILTIN_LOADPACKAGEASYNCTICK_RVA        ::LESDK::Address::FromOffset(0xa7c20)
     #define BUILTIN_STATICALLOCATEOBJECT_RVA        ::LESDK::Address::FromOffset(0x114c40)
     #define BUILTIN_OBJECT_LOGINTERNAL_RVA          ::LESDK::Address::FromOffset(0xc6a10)
-    #define BUILTIN_APPLOGF_RVA                     ::LESDK::Address::FromOffset(0xf77b0)
-    #define BUILTIN_APPERRORLOGF_RVA                ::LESDK::Address::FromOffset(0xf76c0)
+    #define BUILTIN_APPLOGF_RVA                     ::LESDK::Address::FromOffset(0xf76c0)
+    #define BUILTIN_APPERRORLOGF_RVA                ::LESDK::Address::FromOffset(0xf77b0)
 #elif defined(SDK_TARGET_LE3)
 
     #define BUILTIN_CALLFUNCTION_PHOOK              ::LESDK::Address::FromPostHook(/* 40 55 53 56 57 */ "41 54 41 55 41 56 41 57 48 81 EC A8 04 00 00 48 8D 6C 24 20 48 C7 45 68 FE FF FF FF")
