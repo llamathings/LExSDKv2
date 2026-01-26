@@ -24,6 +24,12 @@ struct FRepRecord final {
 static_assert(sizeof(FRepRecord) == 0x0C);
 
 // ! Common native structs
+struct FScriptInterface
+{
+    UObject* Object;
+    void* Interface;
+};
+
 struct FObjectResource
 {
     SFXName ObjectName;
