@@ -85,6 +85,7 @@ struct SFXName {
     SFXNameEntry* GetEntry() noexcept;
     SFXNameEntry const* GetEntry() const noexcept;
     char const* GetName() const noexcept;
+    FString Instanced() const noexcept;
     SIZE_T GetLength() const noexcept;
 
     template<bool WithRAII>
@@ -122,6 +123,10 @@ void SFXName::AppendToString(FStringBase<WithRAII>& OutString, FormatMode const 
     } else if (Mode == k_formatInstanced && Number > 0) {
         OutString.AppendFormat(L"_%d", Number - 1);
     }
+}
+
+inline FString SFXName::Instanced() const noexcept {
+    return ToString(SFXName::FormatMode::k_formatInstanced);
 }
 
 inline FString SFXName::ToString(FormatMode const Mode) const {
