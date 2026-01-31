@@ -113,6 +113,15 @@ namespace LESDK {
 // ========================================
 
 #if defined(SDK_TARGET_LE1)
+
+#elif defined(SDK_TARGET_LE2)
+
+#elif defined(SDK_TARGET_LE3)
+
+#endif
+
+
+#if defined(SDK_TARGET_LE1)
     #define BUILTIN_CALLFUNCTION_PHOOK              ::LESDK::Address::FromPostHook(/* 40 55 53 56 57 */ "41 54 41 55 41 56 41 57 48 81 EC A8 04 00 00 48 8D 6C 24 20 48 C7 45 68 FE FF FF FF")
     #define BUILTIN_GENGINE_RIP                     ::LESDK::Address::FromInstrRelative("48 8B 05 ?? ?? ?? ?? 83 A0 ?? ?? ?? ?? DF E8")
     #define BUILTIN_GMALLOC_RIP                     ::LESDK::Address::FromInstrRelative("48 8B 0D ?? ?? ?? ?? 48 8B 01 44 8B C3 48 8B D7")
@@ -128,7 +137,7 @@ namespace LESDK {
     #define BUILTIN_STATICALLOCATEOBJECT_PHOOK      ::LESDK::Address::FromPostHook(/* 4C 89 44 24 ?? */ "55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC 80 05 00 00")
     #define BUILTIN_STATICCONSTRUCTOBJECT_PHOOK     ::LESDK::Address::FromPostHook(/* 48 8B C4 4C 89 */ "40 ?? 56 57 41 54 41 56 41 57 48 83 EC 70")
     #define BUILTIN_UWORLDSPAWNACTOR_PHOOK          ::LESDK::Address::FromPostHook(/* 48 8B C4 55 41 */ "54 41 55 41 56 41 57 48 8D 68 ?? 48 81 EC B0 00 00 00 48 C7 45 ?? FE FF FF FF 48 89 58 ?? 48 89 70 ?? 48 89 78 ?? 49 8B F9")
-    #define BUILTIN_EXEC_PHOOK                      ::LESDK::Address::FromPostHook(/* 48 8b c4 48 89 */ "50 10 55 56 57 41 54 41 55 41 56 41 57 48 8d a8 d8 fe ff ff 48 81 ec f0 01 00 00 48 c7 45 60 fe ff ff ff")
+    #define BUILTIN_UENGINE_EXEC_RVA                ::LESDK::Address::FromOffset(0x3a3010)
     #define BUILTIN_VERIFYIMPORT_RVA                ::LESDK::Address::FromOffset(0x13f280)
     #define BUILTIN_CREATEEXPORT_RVA                ::LESDK::Address::FromOffset(0x1354a0)
     #define BUILTIN_LOADPACKAGE_RVA                 ::LESDK::Address::FromOffset(0x166650)
@@ -142,6 +151,11 @@ namespace LESDK {
     #define BUILTIN_GAMEENGINETICK_RVA              ::LESDK::Address::FromOffset(0x3ca090)
     #define BUILTIN_TLKLOOKUP_RVA                   ::LESDK::Address::FromOffset(0xb24470)
     #define BUILTIN_SETLINKER_RVA                   ::LESDK::Address::FromOffset(0x16ba40)
+    #define BUILTIN_FINDPACKAGEFILE_RVA             ::LESDK::Address::FromOffset(0xb33450)
+    #define BUILTIN_UWORLD_FARMOVEACTOR_RVA         ::LESDK::Address::FromOffset(0x3ffce0)
+    #define BUILTIN_UGAMEENGINE_EXEC_RVA            ::LESDK::Address::FromOffset(0x3BD5D0)
+    #define BUILTIN_UTEXTURE2D_SERIALIZE_RVA        ::LESDK::Address::FromOffset(0x2742b0)
+    #define BUILTIN_OODLE_DECOMPRESS_RVA            ::LESDK::Address::FromOffset(0x15adb0)
 
 #elif defined(SDK_TARGET_LE2)
     #define BUILTIN_CALLFUNCTION_PHOOK              ::LESDK::Address::FromPostHook(/* 40 55 53 56 57 */ "41 54 41 55 41 56 41 57 48 81 EC A8 04 00 00 48 8D 6C 24 20 48 C7 45 68 FE FF FF FF")
@@ -159,7 +173,7 @@ namespace LESDK {
     #define BUILTIN_STATICALLOCATEOBJECT_PHOOK      ::LESDK::Address::FromPostHook(/* 4C 89 44 24 ?? */ "55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC 80 05 00 00")
     #define BUILTIN_STATICCONSTRUCTOBJECT_PHOOK     ::LESDK::Address::FromPostHook(/* 48 8B C4 48 89 */ "50 ?? 56 57 41 55 41 56 41 57 48 83 EC 70")
     #define BUILTIN_UWORLDSPAWNACTOR_PHOOK          ::LESDK::Address::FromPostHook(/* 48 8B C4 55 41 */ "54 41 55 41 56 41 57 48 8D 68 ?? 48 81 EC A0 00 00 00 48 C7 45 ?? FE FF FF FF 48 89 58 ?? 48 89 70 ?? 48 89 78 ?? 49 8B F9")
-    #define BUILTIN_EXEC_PHOOK                      ::LESDK::Address::FromPostHook(/* 48 8b c4 55 56 */ "57 41 54 41 55 41 56 41 57 48 8d a8 c8 fd ff ff 48 81 ec 20 03 00 00")
+    #define BUILTIN_UENGINE_EXEC_RVA                ::LESDK::Address::FromOffset(0x500050)
     #define BUILTIN_VERIFYIMPORT_RVA                ::LESDK::Address::FromOffset(0xe05b0)
     #define BUILTIN_CREATEEXPORT_RVA                ::LESDK::Address::FromOffset(0xdfad0)
     #define BUILTIN_LOADPACKAGE_RVA                 ::LESDK::Address::FromOffset(0x10f5f0)
@@ -171,7 +185,14 @@ namespace LESDK {
     #define BUILTIN_GAMEENGINETICK_RVA              ::LESDK::Address::FromOffset(0x546980)
     #define BUILTIN_GISREQUESTINGEXIT_RVA           ::LESDK::Address::FromOffset(0x168a47c)
     #define BUILTIN_SETLINKER_RVA                   ::LESDK::Address::FromOffset(0x114b70)
-
+    #define BUILTIN_FINDPACKAGEFILE_RVA             ::LESDK::Address::FromOffset(0xaee720)
+    #define BUILTIN_UWORLD_FARMOVEACTOR_RVA         ::LESDK::Address::FromOffset(0x57ab10)
+    #define BUILTIN_UGAMEENGINE_EXEC_RVA            ::LESDK::Address::FromOffset(0x5383C0) 
+    #define BUILTIN_UTEXTURE2D_SERIALIZE_RVA        ::LESDK::Address::FromOffset(0x39ec80)
+    #define BUILTIN_OODLE_DECOMPRESS_RVA            ::LESDK::Address::FromOffset(0x103ac0)
+    #define BUILTIN_REGISTER_TFC_RVA                ::LESDK::Address::FromOffset(0x390d30)
+    #define BUILTIN_INTERNAL_FIND_FILES_RVA         ::LESDK::Address::FromOffset(0xa4bcc0)
+    #define BUILTIN_GFILEMANAGER_RVA                ::LESDK::Address::FromOffset(0x16823c0)
 #elif defined(SDK_TARGET_LE3)
     #define BUILTIN_CALLFUNCTION_PHOOK              ::LESDK::Address::FromPostHook(/* 40 55 53 56 57 */ "41 54 41 55 41 56 41 57 48 81 EC A8 04 00 00 48 8D 6C 24 20 48 C7 45 68 FE FF FF FF")
     #define BUILTIN_GENGINE_RIP                     ::LESDK::Address::FromInstrRelative("48 8B 05 ?? ?? ?? ?? 83 A0 ?? ?? ?? ?? DF")
@@ -188,7 +209,7 @@ namespace LESDK {
     #define BUILTIN_STATICALLOCATEOBJECT_PHOOK      ::LESDK::Address::FromPostHook(/* 4C 89 44 24 ?? */ "55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC 80 05 00 00")
     #define BUILTIN_STATICCONSTRUCTOBJECT_PHOOK     ::LESDK::Address::FromPostHook(/* 48 8B C4 48 89 */ "50 ?? 56 57 41 55 41 56 41 57 48 83 EC 70")
     #define BUILTIN_UWORLDSPAWNACTOR_PHOOK          ::LESDK::Address::FromPostHook(/* 48 8B C4 55 41 */ "54 41 55 41 56 41 57 48 8D 68 ?? 48 81 EC A0 00 00 00 48 C7 45 ?? FE FF FF FF 48 89 58 ?? 48 89 70 ?? 48 89 78 ?? 49 8B F9")
-    #define BUILTIN_EXEC_PHOOK                      ::LESDK::Address::FromPostHook(/* 48 8b c4 4c 89 */ "40 18 48 89 50 10 48 89 48 08 55 53 56 57 41 54 41 55 41 56 41 57 48 8d a8 58 fe ff ff")
+    #define BUILTIN_UENGINE_EXEC_RVA                ::LESDK::Address::FromOffset(0x50be20)
     #define BUILTIN_VERIFYIMPORT_RVA                ::LESDK::Address::FromOffset(0x105c10)
     #define BUILTIN_CREATEEXPORT_RVA                ::LESDK::Address::FromOffset(0xfbdd0)
     #define BUILTIN_LOADPACKAGE_RVA                 ::LESDK::Address::FromOffset(0x12b250)
@@ -200,5 +221,12 @@ namespace LESDK {
     #define BUILTIN_GAMEENGINETICK_RVA              ::LESDK::Address::FromOffset(0x5502c0)
     #define BUILTIN_GISREQUESTINGEXIT_RVA           ::LESDK::Address::FromOffset(0x17d5698)
     #define BUILTIN_SETLINKER_RVA                   ::LESDK::Address::FromOffset(0x130280)
-
+    #define BUILTIN_FINDPACKAGEFILE_RVA             ::LESDK::Address::FromOffset(0xabf790)
+    #define BUILTIN_UWORLD_FARMOVEACTOR_RVA         ::LESDK::Address::FromOffset(0x581450)
+    #define BUILTIN_UGAMEENGINE_EXEC_RVA            ::LESDK::Address::FromOffset(0x541920)
+    #define BUILTIN_UTEXTURE2D_SERIALIZE_RVA        ::LESDK::Address::FromOffset(0x3C1FB0)
+    #define BUILTIN_OODLE_DECOMPRESS_RVA            ::LESDK::Address::FromOffset(0x11fd10)
+    #define BUILTIN_REGISTER_TFC_RVA                ::LESDK::Address::FromOffset(0x3B8470)
+    #define BUILTIN_INTERNAL_FIND_FILES_RVA         ::LESDK::Address::FromOffset(0xa45ad0)
+    #define BUILTIN_GFILEMANAGER_RVA                ::LESDK::Address::FromOffset(0x17cd5d0)
 #endif
