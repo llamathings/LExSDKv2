@@ -12396,14 +12396,63 @@ public:
 
 // Class Engine.World
 // 0x03F4 (0x0454 - 0x0060)
-class UWorld : public UObject
+class UWorld : public UObject // 1108
 {
 public:
+    // Note: 01/09/2024 Mgamerz
+    // Offsets for objects here were calculated using EmitObjectReference in static constructor hooks
+    // Some objects were not loaded so they could not have their type determined.
+    /*
+     *World OBJARRREF 78
+    World OBJREF 88
+    World OBJREF 90
+    World OBJREF 98
+    World OBJREF a0
+    World OBJREF 118
+    World OBJREF 120
+    World OBJREF 180
+    World OBJARRREF 1b0
+    World OBJREF 1d8 LineBatch (SDK)
+    World OBJREF 1e0 LineBatch (SDK)
+    World OBJARRREF 204
+    World OBJARRREF 214
+    World OBJARRREF 360
+    */
+    unsigned char                                      UnknownData00[0x18];    // 0x0060 (0x078) MISSED OFFSET
+    TArray<ULevel*>                                    Levels;                 // 0x78 (Size 0x10)
+    ULevel* PersistentLevel;                                                   // 0x88 (Size 0x8)
+    UObject* UnknownPointer90;                                                 // 0x90 (Size 0x8)
+    ULevel* CurrentLevel;		                                               // 0x98 (Size 0x8)
+    UObject* UnknownPointerA0;	                                               // 0xA0 (Size 0x08)
+    unsigned char                                      UnknownData01[0x70];    // 0xA8 - 0x118
+    UObject* UnknownPointer118;	                                               // 0x118 (Size 0x8)
+    UNetDriver* NetDriver;                                                     // 0x120 (Size 0x8)
+    unsigned char                                      UnknownData02[0x58];    // 0x128 - 0x180
+    UObject* UnknownPointer180;                                                // 0x180 (Size 0x8)
+    unsigned char                                      UnknownData03[0x28];    // 0x188 - 0x1b0
+    TArray<UObject*>								   UnknownArrayPointer1b0; // 0x1b0 (Size 0x10)
+    unsigned char                                      UnknownData04[0x18];    // 0x1C0 - 0x1D8
+    ULineBatchComponent* LineBatcher;                                          // 0x1D8 (0x0008) MISSED OFFSET
+    ULineBatchComponent* PersistentLineBatcher;                                // 0x1E0 (0x0008) MISSED OFFSET
+
+    // This is the last line of the original v2 SDK code
+    unsigned char                                      UnknownData05[0x26C];                           		// 0x01E8 (0x026C) MISSED OFFSET
+
+    // This was from LE3-SDK v1. The size doesn't match the original code above, so not sure which one was wrong.
+    // It's kept here for future use
+    //unsigned char                                      UnknownData05[0x18];    // 0x1C0 - 0x1D8
+    //TArray<UObject*>								   UnknownArrayPointer204; // 0x204 (Size 0x10)
+    //TArray<UObject*>						 		   UnknownArrayPointer214; // 0x214 (Size 0x10)
+    //unsigned char                                      UnknownData06[0x144];   // 0x21C - 0x360
+    //TArray<UObject*>								   UnknownArrayPointer360; // 0x360 (Size 0x10)
+    //unsigned char                                      UnknownData07[0x28];    // 0x370 - 0x398
+
+    /* Original v2 SDK code here
     unsigned char                                      UnknownData00[0x178];                           		// 0x0060 (0x0178) MISSED OFFSET
     ULineBatchComponent* LineBatcher;                                                                       // 0x01D8 (0x0008) MISSED OFFSET
     ULineBatchComponent* PersistentLineBatcher;                                                             // 0x01E0 (0x0008) MISSED OFFSET
     unsigned char                                      UnknownData01[0x26C];                           		// 0x01E8 (0x026C) MISSED OFFSET
-
+    */
 private:
 	static UClass* pClassPointer;
 
