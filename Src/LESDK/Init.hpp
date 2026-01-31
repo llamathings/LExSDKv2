@@ -139,6 +139,7 @@ namespace LESDK {
     #define BUILTIN_GTLKTABLE_RVA                   ::LESDK::Address::FromOffset(0x16c88ff)
     #define BUILTIN_GISREQUESTINGEXIT_RVA           ::LESDK::Address::FromOffset(0x16b66f0)
     #define BUILTIN_APPERRORLOGF_RVA                ::LESDK::Address::FromOffset(0x14ec50)
+    #define BUILTIN_GAMEENGINETICK_RVA              ::LESDK::Address::FromOffset(0x3ca090)
     #define BUILTIN_TLKLOOKUP_RVA                   ::LESDK::Address::FromOffset(0xb24470)
     #define BUILTIN_SETLINKER_RVA                   ::LESDK::Address::FromOffset(0x16ba40)
 
@@ -167,6 +168,7 @@ namespace LESDK {
     #define BUILTIN_OBJECT_LOGINTERNAL_RVA          ::LESDK::Address::FromOffset(0xc6a10)
     #define BUILTIN_APPLOGF_RVA                     ::LESDK::Address::FromOffset(0xf76c0)
     #define BUILTIN_APPERRORLOGF_RVA                ::LESDK::Address::FromOffset(0xf77b0)
+    #define BUILTIN_GAMEENGINETICK_RVA              ::LESDK::Address::FromOffset(0x546980)
     #define BUILTIN_GISREQUESTINGEXIT_RVA           ::LESDK::Address::FromOffset(0x168a47c)
     #define BUILTIN_SETLINKER_RVA                   ::LESDK::Address::FromOffset(0x114b70)
 
@@ -195,6 +197,7 @@ namespace LESDK {
     #define BUILTIN_OBJECT_LOGINTERNAL_RVA          ::LESDK::Address::FromOffset(0xe1d50)
     #define BUILTIN_APPLOGF_RVA                     ::LESDK::Address::FromOffset(0x113160)
     #define BUILTIN_APPERRORLOGF_RVA                ::LESDK::Address::FromOffset(0x113250)
+    #define BUILTIN_GAMEENGINETICK_RVA              ::LESDK::Address::FromOffset(0x5502c0)
     #define BUILTIN_GISREQUESTINGEXIT_RVA           ::LESDK::Address::FromOffset(0x17d5698)
     #define BUILTIN_SETLINKER_RVA                   ::LESDK::Address::FromOffset(0x130280)
 
