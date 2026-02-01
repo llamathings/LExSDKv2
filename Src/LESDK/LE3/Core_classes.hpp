@@ -777,7 +777,7 @@ public:
     TArray<FObjectExport>                              ExportMap;                                               // 0x011C (0x0010)
     unsigned char                                      UnknownData01[0x58]; // already subbed 12                           		// 0x012C (0x0068) MISSED OFFSET
     FString                                            Filename;                                                // 0x0194 (0x0010)
-    unsigned char                                      UnknownData02[0x8];                           		    // 0x01A4 (0x0008) MISSED OFFSET
+    EObjectFlags                                       ContextFlags; // Used to determine if an object should load or not
 
 
 

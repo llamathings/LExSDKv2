@@ -168,7 +168,7 @@ class UObject
 public:
     // void*                            VfTableObject;                      // 0x0000 (0x08) - NOT AUTO-GENERATED PROPERTY 
     int                             ObjectInternalInteger;              // 0x0008 (0x04) - NOT AUTO-GENERATED PROPERTY 
-    unsigned long long              ObjectFlags;                        // 0x000C (0x08) - NOT AUTO-GENERATED PROPERTY 
+    EObjectFlags                    ObjectFlags;                        // 0x000C (0x08) - NOT AUTO-GENERATED PROPERTY 
     class UObject*                  HashNext;                           // 0x0014 (0x08) - NOT AUTO-GENERATED PROPERTY 
     class UObject*                  HashOuterNext;                      // 0x001C (0x08) - NOT AUTO-GENERATED PROPERTY 
     struct FStateFrame*             StateFrame;                         // 0x0024 (0x08) - NOT AUTO-GENERATED PROPERTY 
@@ -761,8 +761,8 @@ public:
     TArray<FObjectImport>                              ImportMap;                                               // 0x011C (0x0010)
     TArray<FObjectExport>                              ExportMap;                                               // 0x011C (0x0010)
     unsigned char                                      UnknownData01[0x58]; // already subbed 12                           		// 0x012C (0x0068) MISSED OFFSET
-    FString                                            Filename;                                                // 0x0194 (0x0010)
-    unsigned char                                      UnknownData02[0x8];                           		    // 0x01A4 (0x0008) MISSED OFFSET
+    FString                                            Filename;
+    EObjectFlags                                       ContextFlags; // Used to determine if an object should load or not
 
     // Original code:
 	/*

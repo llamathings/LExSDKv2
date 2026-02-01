@@ -51,7 +51,7 @@ struct FObjectExport : public FObjectResource
     int ClassIndex;
     int SuperclassIndex;
     int ArchetypeIndex;
-    long long ObjectFlags;
+    EObjectFlags ObjectFlags;
     int SerialSize;
     int DataOffset;
 
