@@ -92,9 +92,6 @@ enum ELoadFlags
 
 namespace LESDK {
 
-    void InitializeConsole();
-    void TerminateConsole();
-
     // These functions below are templated over UObject to ensure late binding to the UObject type in question.
     // In other words, we don't need to have the concrete UObject structure by this point.
 

@@ -15,21 +15,7 @@
 
 
 namespace LESDK {
-
-    UINT GetAnsiLengthWide(WCHAR const* InWideStr, UINT InWideLength);
-    UINT GetUtf8LengthWide(WCHAR const* InWideStr, UINT InWideLength);
-
-    UINT GetWideLengthAnsi(char const* InAnsiStr, UINT InAnsiLength);
-    UINT GetWideLengthUtf8(char const* InUtf8Str, UINT InUtf8Length);
-
-    bool EncodeAnsiFromWide(WCHAR const* InWideStr, UINT InWideLength, char* OutAnsiStr, UINT OutAnsiLength, DWORD* pOutError);
-    bool EncodeUtf8FromWide(WCHAR const* InWideStr, UINT InWideLength, char* OutUtf8Str, UINT OutUtf8Length, DWORD* pOutError);
-
-    bool EncodeWideFromAnsi(char const* InAnsiStr, UINT InAnsiLength, WCHAR* OutWideStr, UINT OutWideLength, DWORD* pOutError);
-    bool EncodeWideFromUtf8(char const* InUtf8Str, UINT InUtf8Length, WCHAR* OutWideStr, UINT OutWideLength, DWORD* pOutError);
-
     DWORD WideStringHashCI(WCHAR const* Str) noexcept;
-
 }
 
 class FStringView;

@@ -27,7 +27,6 @@ namespace Detail { void DefaultWarn(char const* Message); }
 
 #endif
 
-
 // ! Basic type definitions.
 // ========================================
 

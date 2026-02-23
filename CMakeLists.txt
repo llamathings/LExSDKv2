@@ -20,6 +20,7 @@ set_property (GLOBAL PROPERTY USE_FOLDERS ON)
 option (LESDK_WITH_LE1 "Create LE1 SDK project." ON)
 option (LESDK_WITH_LE2 "Create LE2 SDK project." ON)
 option (LESDK_WITH_LE3 "Create LE3 SDK project." ON)
+option (LESDK_WITH_LEL "Create LEL SDK project." ON)
 option (LESDK_WITH_SAMPLES "Create sample projects." ${PROJECT_IS_TOP_LEVEL})
 option (LESDK_WITH_TESTS "Create test projects." ${PROJECT_IS_TOP_LEVEL})
 
@@ -96,7 +97,6 @@ set (PROJ_SRCS_SHARED
   ${SRCS_ROOT}/Init.cpp
   ${SRCS_ROOT}/Init.hpp
 )
-
 
 # ! Binary output structure.
 # ========================================
@@ -200,6 +200,35 @@ if (LESDK_WITH_LE3)
   target_include_directories (${PROJ_NAME}-LE3 PUBLIC ${PROJ_INCL_SHARED})
   target_link_libraries (${PROJ_NAME}-LE3 PUBLIC ${PROJ_LINK_SHARED})
   target_precompile_headers (${PROJ_NAME}-LE3 PUBLIC ${SRCS_ROOT}/_Global.pch.hpp)
+
+endif ()
+
+# ! LESDK project for LEL.
+# ========================================
+
+if (LESDK_WITH_LEL)
+
+  set (PROJ_SRCS_LEL
+    ${SRCS_ROOT}/LESDK.natvis
+    
+    ${SRCS_ROOT}/Common/Core-LEL.hpp
+    ${SRCS_ROOT}/Common/Common.cpp
+    ${SRCS_ROOT}/Common/Common.hpp
+
+    ${SRCS_ROOT}/Headers.hpp
+    ${SRCS_ROOT}/Init.cpp
+    ${SRCS_ROOT}/Init.hpp
+  )
+
+  add_library (${PROJ_NAME}-LEL STATIC ${PROJ_SRCS_LEL})
+  source_group (TREE ${SRCS_ROOT} FILES ${PROJ_SRCS_LEL})
+
+  target_compile_definitions (${PROJ_NAME}-LEL PRIVATE ${PROJ_DEFS_SHARED} PUBLIC "SDK_TARGET_LEL")
+  target_compile_options (${PROJ_NAME}-LEL PRIVATE ${PROJ_OPTS_SHARED})
+  target_include_directories (${PROJ_NAME}-LEL PUBLIC ${PROJ_INCL_SHARED})
+  target_link_libraries (${PROJ_NAME}-LEL PUBLIC ${PROJ_LINK_SHARED})
+  target_precompile_headers (${PROJ_NAME}-LEL PUBLIC ${SRCS_ROOT}/_Global.pch.hpp)
+
 
 endif ()
 
