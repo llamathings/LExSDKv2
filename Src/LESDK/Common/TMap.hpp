@@ -438,7 +438,14 @@ private:
         if (NumElements <= 1) {
             if (Hash) {
                 std::memcpy(&InlineHash, Hash, previousNumBytes);
-                sdkFree(Hash);
+
+                // OLD CODE LEFT FOR REFERENCE
+                // This causes a crash as we free before we re-use the pointer for Hash.
+                // sdkFree(Hash);
+
+                // We should reallocate it to zero size instead
+                Hash = sdkReallocTyped<FSetElementId>(Hash, 0);
+
             }
         } else {
             if (Hash == nullptr) {

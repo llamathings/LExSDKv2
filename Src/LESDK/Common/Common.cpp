@@ -197,7 +197,7 @@ void* sdkMalloc(DWORD const Count, DWORD const Alignment) {
 
 void* sdkRealloc(void* const Orig, DWORD const Count, DWORD const Alignment) {
     LESDK_CHECK(Orig != nullptr, "");
-    LESDK_CHECK(Count != 0, "");
+    // LESDK_CHECK(Count != 0, ""); // Realloc of size zero is OK
     LESDK_CHECK(Alignment % 8 == 0, "");
     LESDK_CHECK(GMalloc != nullptr, "");
     LESDK_CHECK(*GMalloc != nullptr, "");
