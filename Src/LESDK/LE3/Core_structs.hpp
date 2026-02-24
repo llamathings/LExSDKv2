@@ -59,6 +59,26 @@ struct FGuid
 	int                                                B;                                                		// 0x0004 (0x0004) [0x0000000000000000]              
 	int                                                C;                                                		// 0x0008 (0x0004) [0x0000000000000000]              
 	int                                                D;                                                		// 0x000C (0x0004) [0x0000000000000000]              
+
+
+    // Convenient methods for comparing guids.
+    friend bool operator==(const FGuid& guid1, const FGuid& guid2)
+    {
+        return ((guid1.A == guid2.A) && (guid1.B == guid2.B) && (guid1.C == guid2.C) && (guid1.D == guid2.D));
+    }
+    friend bool operator!=(const FGuid& guid1, const FGuid& guid2)
+    {
+        return ((guid1.A != guid2.A) || (guid1.B != guid2.B) || (guid1.C != guid2.C) || (guid1.D != guid2.D));
+    }
+
+    static FGuid FGuid::MakeRandomGuid() {
+        // Memory wise these take the same amount of space
+        // so just use the Windows API to make a UUID
+        // and then cast it to FGuid.
+        GUID guid;
+        CoCreateGuid(&guid);
+        return (FGuid) * ((FGuid*)&guid);
+    }
 };
 
 // ScriptStruct Core.Object.Vector2D
