@@ -88,6 +88,9 @@ set (PROJ_SRCS_SHARED
   ${SRCS_ROOT}/Common/SFXName.hpp
   ${SRCS_ROOT}/Common/TArray.hpp
   ${SRCS_ROOT}/Common/TMap.hpp
+  ${SRCS_ROOT}/Common/TLinkedList.hpp
+  ${SRCS_ROOT}/Common/RefCountPointer.hpp
+  ${SRCS_ROOT}/Common/FArchive.hpp
   ${SRCS_ROOT}/Common/Math.hpp
 
   ${SRCS_ROOT}/Common/Common.cpp
