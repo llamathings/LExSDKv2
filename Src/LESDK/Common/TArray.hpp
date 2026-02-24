@@ -512,6 +512,10 @@ public:
     TArray() : TArrayBase{} {}
     explicit TArray(size_type Capacity);
     TArray(size_type Count, const_reference Value);
+
+    // Makes a TArray from the given buffer and size.
+    // Allocates memory with GMalloc and copies the buffer into it.
+    TArray(T* Buffer, int BufferSize);
     TArray(std::initializer_list<value_type> const List) : TArrayBase{ List } {}
 
     ~TArray() noexcept {}
@@ -546,6 +550,14 @@ TArray<T>::TArray(size_type const Count, const_reference Value)
     : TArrayBase{}
 {
     this->InsertRange(0, Count, Value);
+}
+
+template<TArrayElement T>
+TArray<T>::TArray(T* Buffer, int BufferSize)
+{
+    Data = (BYTE*)sdkMalloc(BufferSize);
+    memcpy(Data, Buffer, BufferSize);
+    CountMax = CountItems = BufferSize;
 }
 
 template<TArrayElement T>
