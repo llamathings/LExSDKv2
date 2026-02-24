@@ -35,6 +35,8 @@ typedef signed short            SWORD;
 typedef signed int              SDWORD;
 typedef unsigned long long      QWORD;
 typedef signed long long        SQWORD;
+typedef unsigned long           BITFIELD;
+
 
 typedef size_t                  SIZE_T;
 
@@ -305,3 +307,13 @@ inline EObjectFlags& operator&=(EObjectFlags& lhs, EObjectFlags rhs) {
 
 // Address macros
 #define LEASI_RVA(RVA) ::LESDK::Address::FromOffset(RVA)
+
+
+// Shared enums
+// Partially implemented enum
+enum ECookingTarget {
+    CT_Unknown = 0x0,
+    CT_Windows = 0x1,
+    CT_WindowServer = 0x2,
+    CT_WindowsConsole = 0x40
+};
