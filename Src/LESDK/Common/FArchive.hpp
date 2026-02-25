@@ -10,7 +10,7 @@
 #include "LESDK/Common/Core.hpp"
 #include "LESDK/Common/TArray.hpp"
 
-//#pragma pack(push, 4)
+#pragma pack(push, 4)
 #if defined(SDK_TARGET_LE1)
     #define AR_VER 684
     #define AR_LICENSEE_VER 171
@@ -95,6 +95,8 @@ public:
 
 };
 
+static_assert(sizeof(FArchive) == 0x8C, "FArchive size is not 0x8C!");
+
 struct FArchiveProxy : public FArchive {
     FArchive* InnerArchive;
 };
@@ -107,6 +109,8 @@ public:
     INT Offset;
     TArray<BYTE>& Data;
 };
+
+static_assert(sizeof(FMemoryArchiveBase) == 0x98, "FMemoryArchiveBase size is not 0x98!");
 
 // Just for distinction
 struct FMemoryWriter : public FMemoryArchiveBase {
@@ -135,3 +139,5 @@ public:
     INT Num; //0x9C
     INT Max; // 0xAO
 };
+
+#pragma pack(pop)
