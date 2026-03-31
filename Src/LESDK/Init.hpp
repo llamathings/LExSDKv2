@@ -229,4 +229,5 @@ namespace LESDK {
     #define BUILTIN_REGISTER_TFC_RVA                ::LESDK::Address::FromOffset(0x3B8470)
     #define BUILTIN_INTERNAL_FIND_FILES_RVA         ::LESDK::Address::FromOffset(0xa45ad0)
     #define BUILTIN_GFILEMANAGER_RVA                ::LESDK::Address::FromOffset(0x17cd5d0)
+    #define BUILTIN_CALCSCENEVIEW_RVA               ::LESDK::Address::FromOffset(0x6cffd0)
 #endif
