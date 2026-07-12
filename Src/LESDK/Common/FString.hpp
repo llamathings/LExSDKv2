@@ -56,6 +56,7 @@ public:
 
     void Clear();
     void Reset();
+    void Blank();
     void Reserve(size_type Capacity);
 
     INT FindStr(const_pointer Needle, bool bIgnoreCase = false) const noexcept;
@@ -162,6 +163,18 @@ void FStringBase<WithRAII>::Reset() {
     if (Storage.Capacity() > 0) {
         Storage.Shrink();
     }
+}
+
+/// <summary>
+/// Initializes the backing data storage to all zeros. In some usages in game code, an FString is allocated but
+/// is not initialized, so you must blank it in these instances first where appropriate.
+/// </summary>
+/// <typeparam name="WithRAII"></typeparam>
+template<bool WithRAII>
+void FStringBase<WithRAII>::Blank() {
+    Storage.Data = 0;
+    Storage.CountItems = 0;
+    Storage.CountMax = 0;
 }
 
 template<bool WithRAII>
